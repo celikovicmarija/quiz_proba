@@ -1,0 +1,4 @@
+q q1234 /Users/Marija/eclipse-workspace/rmt_projekat/resources/null
+petra 12345 /Users/Marija/eclipse-workspace/rmt_projekat/resources/null
+petra 123456 /Users/Marija/eclipse-workspace/rmt_projekat/resources/petra
+petra 123456 /Users/Marija/eclipse-workspace/proba_quiz/dbpetra

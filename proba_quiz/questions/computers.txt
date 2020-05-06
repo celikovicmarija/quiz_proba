@@ -1,0 +1,30 @@
+Who is the father of Computer?
+Charles Babbage
+ALU is?
+Arithmetic Logic Unit
+First page of Website is termed as?
+Homepage
+UNIVAC is? 
+Universal Automatic Computer
+FORTRAN is? 
+Formula Translation 
+Who invented the high level language "C"?
+Dennis Ritchie
+A computer program that converts an entire program into machine language is called a/an ?
+Compiler
+A fault in a computer program which prevents it from working correctly is known as ?
+Bug
+RAM stands for?
+Random access memory
+One kilobyte is equal to how many bytes?
+1024
+Www is short for?
+World wide web
+Select the odd one out: interpreter, operating system, compiler, assembler?
+Operating system
+The term PC is short for?
+Personal computer
+The brain of the compyter is CPU (true/false)?
+true
+WAN is short for?
+Wide Area Network
