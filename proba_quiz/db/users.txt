@@ -1,6 +1,1 @@
-pera pera123 /Users/Marija/eclipse-workspace/proba_quiz/db/pera
-mika mika123 /Users/Marija/eclipse-workspace/proba_quiz/db/mika
-kaca kaca123 /Users/Marija/eclipse-workspace/proba_quiz/db/kaca
-mica mica123 /Users/Marija/eclipse-workspace/proba_quiz/db/mica
-jovan jovan123 /Users/Marija/eclipse-workspace/proba_quiz/db/jovan
-lena lena123 /Users/Marija/eclipse-workspace/proba_quiz/db/lena
+
