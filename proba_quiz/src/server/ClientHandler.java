@@ -364,10 +364,9 @@ public class ClientHandler extends Thread{
 						
 					}
 					case "7": {
-						clientOutput.print(""+p);
 						if(p<1 || p>4)
 						 {
-							clientOutput.print("All is fine here.");
+							
 							exit();
 							signal = false;
 							break;
@@ -675,7 +674,7 @@ public class ClientHandler extends Thread{
 			for (String u : users) {
 				if(u.startsWith(username)) {
 					String[] userData = u.split(" ");
-					if(password.startsWith(userData[1])) {
+				if(password.startsWith(encrypt(userData[1], userData[0]))) {
 						ruser.setUsername(userData[0]);
 						ruser.setPassword(userData[1]);
 						return true;
@@ -749,8 +748,9 @@ public class ClientHandler extends Thread{
 		} 
 	}
 public void writeUserInFile(RegisteredUser ruser) {
-		
-		String newUserData = ruser.getUsername() + " " + ruser.getPassword() + " " + ruser.getUserPath();
+	
+	String passwordEncrypted=encrypt(ruser.getPassword(), ruser.getUsername());
+	String newUserData = ruser.getUsername() + " " + passwordEncrypted + " " + ruser.getUserPath();
 		
 		try {
 			PrintWriter pw = new PrintWriter(new BufferedWriter(
@@ -869,7 +869,7 @@ public void writeUserInFile(RegisteredUser ruser) {
 				String answer = clientInput.readLine();
 				j++;
 				
-				if(answer.equals(q.getAnswer())) {
+				if(answer.toLowerCase().equals(q.getAnswer().toLowerCase())) {
 					clientOutput.println(">>>Your answer was correct!");
 					user.setScore(user.getScore() + 1);
 				}else {
@@ -936,16 +936,15 @@ public void writeUserInFile(RegisteredUser ruser) {
 			try {
 			
 				clientOutput.println();
-				String pom=" "+i + "." + " "+ questions.get(i).getQuestion();
+				String pom=" "+i + "." + " "+ questions.get(i-1).getQuestion();
 				clientOutput.println(pom);
-				//clientOutput.println(" "+i + "." + " "+ questions.get(i).getQuestion());
 				String answer = clientInput.readLine();
 				
-				if(answer.equals(questions.get(i).getAnswer())) {
+				if(answer.toLowerCase().equals(questions.get(i-1).getAnswer().toLowerCase())) {
 					clientOutput.println(">>>Your answer was correct!\n");
 					ruser.setScore(ruser.getScore() + 1);
 				}else {
-					clientOutput.println(">>>Your answer was incorrect! Correct answer is " + questions.get(i).getAnswer() + ".\n");
+					clientOutput.println(">>>Your answer was incorrect! Correct answer is " + questions.get(i-1).getAnswer() + ".\n");
 				}
 				
 				clientOutput.println();
@@ -990,6 +989,13 @@ public void writeUserInFile(RegisteredUser ruser) {
 		}
 		
 	}
-	
+	public static String encrypt(String msg, String key) {
+		String result="";
+		for (int i=0;i<msg.length();i++) {
+			char c=(char)(key.charAt(i%key.length())^msg.charAt(i));
+			result+=c;
+		}
+		return result;
+	}
 	
 }
