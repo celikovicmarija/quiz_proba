@@ -1,4 +1,2 @@
 pera     AWA /Users/Marija/eclipse-workspace/proba_quiz/db/pera
 mika     \[X /Users/Marija/eclipse-workspace/proba_quiz/db/mika
-jeca     [WP /Users/Marija/eclipse-workspace/proba_quiz/db/jeca
-
