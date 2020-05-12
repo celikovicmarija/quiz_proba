@@ -1,8 +1,0 @@
-pera geography 1
-pera geography 3
-pera quiz_questions 4
-pera general 3
-pera computers 0
-pera geography 0
-pera geography 0
-pera general 0
