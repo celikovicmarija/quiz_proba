@@ -1,30 +1,30 @@
-Who is the father of Computer?
+Who is the father of Computer? (Charles Babbage/ SteveJobs/ Alan Turing/ John von Neumann
 Charles Babbage
-ALU is?
+ALU is? (Association of LISP Users/ Arithmetic Logic Unit/ Applied Laser Unit/ Audio, LAN, and USB)
 Arithmetic Logic Unit
-First page of Website is termed as?
+First page of Website is termed as? (Basepage/Homepage/Profile/ Welcome page)
 Homepage
-UNIVAC is? 
+UNIVAC is? (Unique Automatic Computer/Universal Array Computer/ Universal Automatic Computer/ Unvalued Automatic Computer)
 Universal Automatic Computer
-FORTRAN is? 
+FORTRAN is? (Formal Translator/ Formula Translation/ Formula Transcription/ Formal Transition)
 Formula Translation 
-Who invented the high level language "C"?
+Who invented the high level language "C"? (John Kemeny/ Dennis Ritchie/ Kenneth Thompson/ Bertrand Meyer)
 Dennis Ritchie
-A computer program that converts an entire program into machine language is called a/an ?
+A computer program that converts an entire program into machine language is called a/an ? (Assembler/ CPU/ GPU/ Compiler)
 Compiler
-A fault in a computer program which prevents it from working correctly is known as ?
+A fault in a computer program which prevents it from working correctly is known as? (Mistake/ Glitch/ Bug/ Virus
 Bug
-RAM stands for?
+RAM stands for? (Read all memory/ Remember all memory/ Readily available memory/ Random access memory)
 Random access memory
-One kilobyte is equal to how many bytes?
+One kilobyte is equal to how many bytes? (2/10/1000/1024)
 1024
-Www is short for?
+Www is short for? (World wide webinar/ World wide web/ World wait web/ World witness web)
 World wide web
 Select the odd one out: interpreter, operating system, compiler, assembler?
 Operating system
-The term PC is short for?
+The term PC is short for? (	Post Card/ Phone call/ Program code/ Personal computer)
 Personal computer
 The brain of the compyter is CPU (true/false)?
 true
-WAN is short for?
+WAN is short for?(Wide Arena Network/ Wide Area Nerwork/ Waiting Area Network/ World Area Network)
 Wide Area Network
