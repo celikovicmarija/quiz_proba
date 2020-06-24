@@ -1,11 +1,8 @@
 package server;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
@@ -15,7 +12,6 @@ import java.net.SocketException;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
-import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import client.RegisteredUser;
@@ -27,8 +23,9 @@ public class ClientHandler extends Thread{
 	Socket communicationSocket = null;
 	User user = new User();
 	RegisteredUser ruser= new RegisteredUser();
-	static Random rand = new Random();
-
+	public static String activeUsersResultFile ="/Users/Marija/eclipse-workspace/proba_quiz/db/active_users_results.txt";
+	public static String usersAll ="/Users/Marija/eclipse-workspace/proba_quiz/db/users.txt";
+	public static String pathToUserResults="/Users/Marija/eclipse-workspace/proba_quiz/db/";
 	
 	public ClientHandler(Socket communicationSocket) {
 		this.communicationSocket = communicationSocket;
@@ -317,12 +314,12 @@ public class ClientHandler extends Thread{
 						
 					}
 					case "4": {
-						showUsersResults("/Users/Marija/eclipse-workspace/proba_quiz/db/" + ruser.getUsername()+".txt",1);
+						Connector.showUsersResults(clientOutput,pathToUserResults + ruser.getUsername()+".txt",1);
 						signal = true;
 						break;
 					}
 					case "5": {
-						showUsersResults("/Users/Marija/eclipse-workspace/proba_quiz/db/active_users_results.txt", 0);
+						Connector.showUsersResults(clientOutput,activeUsersResultFile, 0);
 						signal = true;
 						break;
 					}
@@ -341,17 +338,17 @@ public class ClientHandler extends Thread{
 						
 						switch(p) {
 						case 1: {
-							showResultOnASubject("geography");
+							Connector.showResultOnASubject(clientOutput,"geography");
 							break;}
 						case 2: {
-							showResultOnASubject("computers");
+							Connector.showResultOnASubject(clientOutput,"computers");
 							break;}
 						case 3: {
-							showResultOnASubject("history");
+							Connector.showResultOnASubject(clientOutput,"history");
 							break;
 							}
 						case 4: {				
-							showResultOnASubject("general");
+							Connector.showResultOnASubject(clientOutput,"general");
 							break;
 						}
 						default:  {
@@ -364,9 +361,15 @@ public class ClientHandler extends Thread{
 						
 					}
 					case "7": {
+<<<<<<< Updated upstream
 						if(p<1 || p>4)
 						 {
 							
+=======
+					
+						if(p<1 || p>4)
+						 {
+>>>>>>> Stashed changes
 							exit();
 							signal = false;
 							break;
@@ -437,93 +440,7 @@ public class ClientHandler extends Thread{
 		
 		return signal;
 	}
-	public void showUsersResults(String file, int i){
-		if(i==1)
-		clientOutput.println(">>>Okay, fetching results for the user... \n");
-		else 
-			clientOutput.println(">>>Okay, fetching results of online users... \n");
 
-		try {
-			BufferedReader in = new BufferedReader(new FileReader(file));
-			boolean end = false;
-			String text = "";
-			
-			while(!end) {
-				String s = in.readLine();
-				if(s == null) {
-					end = true;
-				}else {
-					text = text + s + " \n";
-				}
-			}
-			in.close();
-			clientOutput.println(text);
-		} catch (FileNotFoundException e) {
-			clientOutput.println(">>>Error: No result has not been found!");
-		} catch (IOException e) {
-			clientOutput.println(">>>Error while showing the results!");
-		}
-	}
-	public void showResultOnASubject(String sub) {
-		clientOutput.println("<<<Okay, preparing the leaderboard...\n");
-		LinkedList<String> rows = new LinkedList<>();
-		LinkedList<UserResult> results= new LinkedList<UserResult>();
-		
-		try {
-			BufferedReader in = new BufferedReader(new FileReader("/Users/Marija/eclipse-workspace/proba_quiz/db/active_users_results.txt"));
-			boolean end = false;
-			
-			while(!end) {
-				String s = in.readLine();
-				if(s == null) {
-					end = true;
-				}else {
-					rows.add(s);
-				}
-			}
-			in.close();
-			for (String r : rows) {
-		
-					String[] resultRow = r.split(" ");
-					resultRow.toString();
-					if(sub.equals(resultRow[1])) {
-						UserResult ur= new UserResult();
-						ur.setSubject(sub);
-						ur.setUsername(resultRow[0]);
-						ur.setScore(Integer.parseInt(resultRow[2]));
-						results.add(ur);
-				}
-					
-			}
-			clientOutput.println(">>>Preparing results for the subject: "+ sub);
-
-			clientOutput.println("\n>>>Here is the leaderboard:\n");
-			try {
-				TimeUnit.MILLISECONDS.sleep((int)(Math.random()*300)+1000);
-			} catch (InterruptedException e) {
-				clientOutput.println(">>>Whoops, fix the sleep timer.");
-
-			}
-
-			clientOutput.println("__________________________");
-			Collections.sort(results, new ScoreSorter());
-			int i=1;
-			for (UserResult userResult : results) {
-				clientOutput.println("|"+i +userResult);
-				i++;
-			}
-			
-			clientOutput.println();
-			
-			
-		} catch (FileNotFoundException e) {
-			clientOutput.println(">>>Error: File has not been found!");
-		} catch (IOException e) {
-			clientOutput.println(">>>Error while reading the file!");
-		}
-		
-	}
-	
 	public void exit() {
 		
 		try {
@@ -550,7 +467,7 @@ public class ClientHandler extends Thread{
 		//Da automatski izbirse ceo sadryaj fajla u koji se upisuju rezultati
 		//Nisam sigurna da radi
 		if (Server.activeRUsers.size()==0 && Server.activeUsers.size()==0) {
-			final File file = new File("/Users/Marija/eclipse-workspace/proba_quiz/db/active_users_results.txt");
+			final File file = new File(activeUsersResultFile);
 			try (PrintWriter writer = new PrintWriter(file))  {
 			    writer.print("");                
 			} catch (FileNotFoundException e) {
@@ -609,7 +526,7 @@ public class ClientHandler extends Thread{
 				username = clientInput.readLine();
 				clientOutput.println(">>>Please enter the password: ");
 				password = clientInput.readLine();
-				isValid = isTheUserRegistered("/Users/Marija/eclipse-workspace/proba_quiz/db/users.txt", username, password);
+				isValid = Connector.isTheUserRegistered(clientOutput,usersAll, username, password, ruser);
 				
 				if(isValid == true) {
 					clientOutput.println(">>>Welcome " + username);
@@ -653,6 +570,7 @@ public class ClientHandler extends Thread{
 			clientOutput.println(">>>Whoops, fix the sleep timer.");
 		}
 	}
+<<<<<<< Updated upstream
 	public boolean isTheUserRegistered(String file, String username, String password) {
 		
 		LinkedList<String> users = new LinkedList<>();
@@ -693,6 +611,9 @@ public class ClientHandler extends Thread{
 		return false;
 	}
 	
+=======
+
+>>>>>>> Stashed changes
 	public void registration() {
 		
 		try {
@@ -708,7 +629,7 @@ public class ClientHandler extends Thread{
 				
 				if(ruser.getUsername().contains(" ")) {
 					clientOutput.println(">>>Username cannot contain blank spaces!");
-				}else if(doesUsernameExist(ruser.getUsername())){
+				}else if(Connector.doesUsernameExist(clientOutput,ruser.getUsername())){
 					clientOutput.println(">>>Username already exists! Please enter another one.");
 				}else {
 					isValid = true;
@@ -733,13 +654,13 @@ public class ClientHandler extends Thread{
 			}while(!isValid);
 			Server.activeRUsers.add(ruser);
 			clientOutput.println(">>>Creating your file, please wait...");
-		File file = new File("/Users/Marija/eclipse-workspace/proba_quiz/db/" + ruser.getUsername()+".txt");
+		File file = new File(pathToUserResults + ruser.getUsername()+".txt");
 
 			if(file.createNewFile()) {
 				clientOutput.println(">>>File " + ruser.getUsername() + " is created.");
 				clientOutput.println(">>>In it, we will save your results.");
-				ruser.setUserPath("/Users/Marija/eclipse-workspace/proba_quiz/db/" + ruser.getUsername());
-				writeUserInFile(ruser);
+				ruser.setUserPath(pathToUserResults + ruser.getUsername());
+				Connector.writeUserInFile(clientOutput,ruser);
 			}else {
 				clientOutput.println(">>>File " + ruser.getUsername() + " was not created.");
 			}
@@ -747,6 +668,7 @@ public class ClientHandler extends Thread{
 			System.out.println(">>>Error happened during registration!");;
 		} 
 	}
+<<<<<<< Updated upstream
 public void writeUserInFile(RegisteredUser ruser) {
 	
 	String passwordEncrypted=encrypt(ruser.getPassword(), ruser.getUsername());
@@ -819,22 +741,9 @@ public void writeUserInFile(RegisteredUser ruser) {
 
 	    for (int sortedSampleIndices[] = new int[size], i = 0; i < size; i++) {
 	        int index = rand.nextInt(list.size() - i);
+=======
+>>>>>>> Stashed changes
 
-	        int j = 0;
-	        for (; j < i && index >= sortedSampleIndices[j]; j++)
-	            index++;
-	        sample.add(list.get(index));
-
-	        for (; j <= i; j++) {
-	            int temp = sortedSampleIndices[j];
-	            sortedSampleIndices[j] = index;
-	            index = temp;
-	        }
-	    }
-
-	    return sample;
-	}
-	
 	public void printCurrentStatus() {
 		
 		Collections.sort(Server.activeUsers, new Comparator<User>() {
@@ -848,18 +757,10 @@ public void writeUserInFile(RegisteredUser ruser) {
 			clientOutput.println(u.getUsername() + " " + u.getScore());
 		}
 	}
-	private void quizAnimation() {
-		clientOutput.println(">>>Okay, quiz loading, please wait...");
-		try {
-			TimeUnit.MILLISECONDS.sleep((int)(Math.random()*300)+1000);
-		} catch (InterruptedException e2) {
-			clientOutput.println(">>>Whoops, fix the sleep timer.");
 
-		}
-	}
 	public void playQuiz() {
-		quizAnimation();
-		LinkedList<Question> questions = readQuestionsFromFile("general");
+		Connector.quizAnimation(clientOutput);
+		LinkedList<Question> questions = Connector.readQuestionsFromFile(clientOutput,"general");
 		int j=1;
 		for (Question q : questions) {
 			try {
@@ -926,11 +827,11 @@ public void writeUserInFile(RegisteredUser ruser) {
 		}
 		
 	}
-	
+
 	
 	public void playQuizRegistered(int n, String filename){
-		LinkedList<Question> questions = readQuestionsFromFile(filename);
-		quizAnimation();
+		LinkedList<Question> questions = Connector.readQuestionsFromFile(clientOutput,filename);
+		Connector.quizAnimation(clientOutput);
 
 		for (int i = 1; i < n+1; i++) {
 			try {
@@ -961,16 +862,14 @@ public void writeUserInFile(RegisteredUser ruser) {
 		clientOutput.println(">>>Your final score is: " + ruser.getScore());
 		clientOutput.println(">>>Saving the results in the database....");
 		clientOutput.println();	
-		saveResults(filename);
+		Connector.saveResults(clientOutput,filename,ruser);
 		clientOutput.println(">>>Your points have been restarted!\n");
 		ruser.setScore(0);
 
 		
 	}
-	
-	public void saveResults(String filename) {
-		String newUserData = ruser.getUsername() + " "+filename+" " +ruser.getScore();
 		
+<<<<<<< Updated upstream
 		try {
 			PrintWriter pw = new PrintWriter(new BufferedWriter(
 					new FileWriter("/Users/Marija/eclipse-workspace/proba_quiz/db/"+ruser.getUsername()+".txt", true)));
@@ -998,4 +897,6 @@ public void writeUserInFile(RegisteredUser ruser) {
 		return result;
 	}
 	
+=======
+>>>>>>> Stashed changes
 }
