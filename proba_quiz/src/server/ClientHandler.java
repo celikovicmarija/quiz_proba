@@ -361,15 +361,11 @@ public class ClientHandler extends Thread{
 						
 					}
 					case "7": {
-<<<<<<< Updated upstream
-						if(p<1 || p>4)
-						 {
-							
-=======
+
 					
 						if(p<1 || p>4)
 						 {
->>>>>>> Stashed changes
+
 							exit();
 							signal = false;
 							break;
@@ -570,7 +566,7 @@ public class ClientHandler extends Thread{
 			clientOutput.println(">>>Whoops, fix the sleep timer.");
 		}
 	}
-<<<<<<< Updated upstream
+
 	public boolean isTheUserRegistered(String file, String username, String password) {
 		
 		LinkedList<String> users = new LinkedList<>();
@@ -611,9 +607,7 @@ public class ClientHandler extends Thread{
 		return false;
 	}
 	
-=======
 
->>>>>>> Stashed changes
 	public void registration() {
 		
 		try {
@@ -668,7 +662,7 @@ public class ClientHandler extends Thread{
 			System.out.println(">>>Error happened during registration!");;
 		} 
 	}
-<<<<<<< Updated upstream
+
 public void writeUserInFile(RegisteredUser ruser) {
 	
 	String passwordEncrypted=encrypt(ruser.getPassword(), ruser.getUsername());
@@ -741,8 +735,7 @@ public void writeUserInFile(RegisteredUser ruser) {
 
 	    for (int sortedSampleIndices[] = new int[size], i = 0; i < size; i++) {
 	        int index = rand.nextInt(list.size() - i);
-=======
->>>>>>> Stashed changes
+
 
 	public void printCurrentStatus() {
 		
@@ -869,7 +862,6 @@ public void writeUserInFile(RegisteredUser ruser) {
 		
 	}
 		
-<<<<<<< Updated upstream
 		try {
 			PrintWriter pw = new PrintWriter(new BufferedWriter(
 					new FileWriter("/Users/Marija/eclipse-workspace/proba_quiz/db/"+ruser.getUsername()+".txt", true)));
@@ -896,7 +888,5 @@ public void writeUserInFile(RegisteredUser ruser) {
 		}
 		return result;
 	}
-	
-=======
->>>>>>> Stashed changes
+
 }
